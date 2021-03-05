@@ -19,10 +19,10 @@ int main() {
     int tc{}, n{};
     scanf("%d", &tc);
     for (int t = 0; t < tc; t++) {
-        //¹è¿­ ÃÊ±âÈ­
+        //init
         init();
 
-        //ÆíÀÇÁ¡ °¹¼ö
+        //í¸ì˜ì  ê°¯ìˆ˜
         scanf("%d", &n);
         int y{}, x{};
 
@@ -30,22 +30,22 @@ int main() {
 
         scanf("%d %d", &y, &x);
 
-        //½ÃÀÛ ÁöÁ¡
+        //ì‹œì‘ ì§€ì 
         start = make_pair(y, x);
         vector<pair<int, int>> v;
 
-        //ÆíÀÇÁ¡ ÁÂÇ¥
+        //í¸ì˜ì  ì¢Œí‘œ
         for (int j = 0; j < n; j++) {
             scanf("%d %d", &y, &x);
             v.push_back(make_pair(y, x));
         }
 
-        //µµÂø ÁöÁ¡
+        //ë„ì°© ì§€ì 
         scanf("%d %d", &y, &x);
         end = make_pair(y, x);
 
-
-        //°¢ ÁöÁ¡¿¡¼­ ´Ù¸¥ÁöÁ¡À¸·Î °¥¼öÀÖ´Â Áö È®ÀÎ.
+        //logic
+        //ê° ì§€ì ì—ì„œ ë‹¤ë¥¸ì§€ì ìœ¼ë¡œ ê°ˆìˆ˜ìˆëŠ” ì§€ í™•ì¸.
         for (int i = 0; i < n + 2; i++) {
             for (int j = 0; j < n + 2; j++) {
                 if (i == j)continue;
@@ -53,14 +53,14 @@ int main() {
 
                 //start
                 if (i == 0) {
-                    //µµÂøÁöÁ¡
+                    //ë„ì°©ì§€ì 
                     if (j == n + 1) {
                         if (abs(start.first - end.first) + abs(start.second - end.second) <= 1000) {
                             map[i][j] = 1;
                             map[j][i] = 1;
                         }
                     }
-                    //ÆíÀÇÁ¡
+                    //í¸ì˜ì 
                     else {
                         if (abs(start.first - v[j - 1].first) + abs(start.second - v[j - 1].second) <= 1000) {
                             map[i][j] = 1;
@@ -72,14 +72,14 @@ int main() {
 
                 //end
                 else if (i == n + 1) {
-                    //Ãâ¹ßÁöÁ¡
+                    //ì¶œë°œì§€ì 
                     if (j == 0) {
                         if (abs(start.first - end.first) + abs(start.second - end.second) <= 1000) {
                             map[i][j] = 1;
                             map[j][i] = 1;
                         }
                     }
-                    //ÆíÀÇÁ¡
+                    //í¸ì˜ì 
                     else {
                         if (abs(end.first - v[j - 1].first) + abs(end.second - v[j - 1].second) <= 1000) {
                             map[i][j] = 1;
@@ -87,12 +87,12 @@ int main() {
                         }
                     }
                 }
-                //ÆíÀÇÁ¡
+                //í¸ì˜ì 
                 else {
-                    //Ãâ¹ßÁöÁ¡ÀÌ°Å³ª µµÂøÁöÁ¡ÀÌ¸é 
+                    //ì¶œë°œì§€ì ì´ê±°ë‚˜ ë„ì°©ì§€ì ì´ë©´ 
                     if (j == 0 || j == n + 1)continue;
                     else {
-                        //´Ù¸¥ ÆíÀÇÁ¡
+                        //ë‹¤ë¥¸ í¸ì˜ì 
                         if (abs(v[i - 1].first - v[j - 1].first) + abs(v[i - 1].second - v[j - 1].second) <= 1000) {
                             map[i][j] = 1;
                             map[j][i] = 1;
@@ -105,7 +105,7 @@ int main() {
             }
         }
 
-        //ÇÃ·çÀÌµå ¿Í¼£ ¾Ë°í¸®Áò -> °¡ÁßÄ¡·Î ÃÖ´Ü°Å¸® Å½»ö
+        //í”Œë£¨ì´ë“œ ì™€ìƒ¬ ì•Œê³ ë¦¬ì¦˜ -> ê°€ì¤‘ì¹˜ë¡œ ìµœë‹¨ê±°ë¦¬ íƒìƒ‰
         for (int k = 0; k < n + 2; k++) {
             for (int i = 0; i < n + 2; i++) {
                 for (int j = 0; j < n + 2; j++) {
@@ -120,8 +120,8 @@ int main() {
                 }
             }
         }
-
-        //map[½ÃÀÛÁöÁ¡][µµÂøÁöÁ¡ ==1 ÀÌ¸é happy ¾Æ´Ï¸é sad
+        //result
+        //map[ì‹œì‘ì§€ì ][ë„ì°©ì§€ì  ==1 ì´ë©´ happy ì•„ë‹ˆë©´ sad
         if (map[0][n + 1])cout << "happy" << "\n";
         else cout << "sad" << "\n";
     }
